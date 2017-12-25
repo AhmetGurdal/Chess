@@ -1,74 +1,62 @@
 public class Piece {
-    boolean isWhite;
-    int x;
-    int y;
+    Spot spot;
 
-    Piece(int x, int y, boolean w){
-        this.x = x;
-        this.y = y;
-        isWhite = w;
+    Piece(Spot x){
+        this.spot = x;
+
 
     }
 
-    public boolean eatRight(){
-        if(isWhite){
-            if (y < 5 && x < 5){
-                x++;
-                y++;
-                return true;
-            }
+    public boolean canEat(Spot x) {
 
-            return false;
-        }
-        else{
-            if (y > 0 && x > 0){
-                x--;
-                y--;
+        if (x.isWhite) {
+
+            if (spot.y > 0 && spot.x < 5) {
+                if (x.isAvaiable || (!x.isAvaiable && !x.isWhite)) {
+                    return false;
+                }
                 return true;
             }
 
             return false;
 
+        } else {
+
+            if (spot.y < 5 && spot.x > 0) {
+
+                if (x.isAvaiable || (!x.isAvaiable && x.isWhite)) {
+                    return false;
+                }
+                return true;
+            }
+
+            return false;
         }
+
+
     }
 
-    public boolean eatLeft(){
-        if(isWhite){
-            if (y < 5 && x > 0){
-                x--;
-                y++;
-                return true;
-            }
+    public boolean canMoveAhead(Spot x){
 
+
+        if(spot.isWhite){
+            if(spot.y >= 0 && spot.y < 5){
+                if(x.isAvaiable){
+
+                return true;}
+           }
             return false;
         }
-        else{
-            if (y < 5 && x > 0){
-                x--;
-                y++;
-                return true;
-            }
 
-            return false;
-
-        }
-    }
-
-    public boolean moveAhead(){
-        if(isWhite){
-            if(y >= 0 && y < 5){
-                y++;
-                return true;
-            }
-            return false;
-        }
 
         else{
-            if(y > 0 && y <= 5){
-                y--;
-                return true;
+            if(spot.y > 0 && spot.y <= 5) {
+                if(x.isAvaiable){
+
+                return true;}
             }
             return false;
         }
     }
+
 }

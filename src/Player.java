@@ -7,18 +7,15 @@ public class Player{
     public Player(Spot[][] board, boolean x){
         if(x){
             for(int i = 0; i < 6; i++){
-                for(int k = 0; k < 6; k++) {
-                    pieces[i] = new Piece(board[0][k].x, board[0][k].y,true);
-                }
+                pieces[i] = new Piece(board[0][i]);
+
             }
 
         }
 
         else{
             for(int i = 0; i < 6; i++){
-                for(int k = 0; k < 6; k++) {
-                    pieces[i] = new Piece(board[0][k].x, board[0][k].y,false);
-                }
+                pieces[i] = new Piece(board[5][i]);
             }
 
         }
