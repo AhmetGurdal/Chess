@@ -2,15 +2,13 @@ public class Test {
     public static void main(String[] args) {
         Game newGame = new Game();
 
-        newGame.moveAhead(newGame.B.pieces[2]);
-        newGame.moveAhead(newGame.B.pieces[2]);
-        newGame.moveAhead(newGame.B.pieces[2]);
-        newGame.moveAhead(newGame.B.pieces[2]);
-        newGame.eatLeft(newGame.W.pieces[3]);
         newGame.moveAhead(newGame.W.pieces[3]);
         newGame.moveAhead(newGame.W.pieces[3]);
         newGame.moveAhead(newGame.W.pieces[3]);
         newGame.moveAhead(newGame.W.pieces[3]);
+        newGame.moveAhead(newGame.B.pieces[3]);
+
+
 
 
 

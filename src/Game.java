@@ -140,7 +140,49 @@ public class Game {
                 b.board[x.spot.y-1][x.spot.x+1].isAvaiable=false;
 
                 B.pieces[s].spot = b.board[x.spot.y-1][x.spot.x+1];
-                B.pieces[s].spot.isWhite = true;
+                B.pieces[s].spot.isWhite = false;
+            }
+
+        }
+        isWin(x);
+    }
+
+    public void eatRight(Piece x){
+        int s = 0;
+        if(x.spot.isWhite){
+            for(int i = 0; i < W.pieces.length;i++) {
+                if (x == W.pieces[i])
+                    s = i;
+
+            }
+            System.out.println(x.canEat(b.board[x.spot.y+1][x.spot.x+1]));
+            if(x.spot.y < 5 && x.spot.x < 5 && x.canEat(b.board[x.spot.y+1][x.spot.x+1])){
+                b.board[x.spot.y][x.spot.x].isAvaiable=true;
+                b.board[x.spot.y][x.spot.x].isWhite=false;
+                b.board[x.spot.y+1][x.spot.x+1].isWhite=true;
+                b.board[x.spot.y+1][x.spot.x+1].isAvaiable=false;
+
+                W.pieces[s].spot = b.board[x.spot.y+1][x.spot.x+1];
+                W.pieces[s].spot.isWhite = true;
+            }
+
+        }
+
+        else{
+            for(int i = 0; i < B.pieces.length;i++) {
+                if (x == B.pieces[i])
+                    s = i;
+
+            }
+
+            if(x.spot.y > 0 && x.spot.x > 0 && x.canEat(b.board[x.spot.y-1][x.spot.x-1])){
+                b.board[x.spot.y][x.spot.x].isAvaiable=true;
+                b.board[x.spot.y][x.spot.x].isWhite=false;
+                b.board[x.spot.y-1][x.spot.x-1].isWhite=false;
+                b.board[x.spot.y-1][x.spot.x-1].isAvaiable=false;
+
+                B.pieces[s].spot = b.board[x.spot.y-1][x.spot.x-1];
+                B.pieces[s].spot.isWhite = false;
             }
 
         }
