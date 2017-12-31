@@ -45,7 +45,7 @@ public class Game {
 
     }
 
-    public void moveAhead(Piece x){
+    public boolean moveAhead(Piece x){
         int s = 0;
         if(x.spot.isWhite){
             for(int i = 0; i < W.pieces.length;i++) {
@@ -61,8 +61,12 @@ public class Game {
                 b.board[x.spot.y+1][x.spot.x].isAvaiable=false;
                 W.pieces[s].spot =  b.board[x.spot.y+1][x.spot.x];
                 W.pieces[s].spot.isWhite=true;
+                isWin(x);
+                return true;
 
-
+            }
+            else{
+                return false;
             }
         }
 
@@ -81,10 +85,14 @@ public class Game {
                 b.board[x.spot.y-1][x.spot.x].isAvaiable=false;
                 B.pieces[s].spot = b.board[x.spot.y-1][x.spot.x];
                 B.pieces[s].spot.isWhite=false;
-
+                isWin(x);
+                return true;
+            }
+            else{
+                return false;
             }
         }
-        isWin(x);
+
     }
     public boolean isWin(Piece x){
         if(x.spot.isWhite){
@@ -105,12 +113,15 @@ public class Game {
 
 
     }
-    public void eatLeft(Piece x){
-        int s = 0;
+    public boolean eatLeft(Piece x){
+        int w = 0;
+        int l = 0;
         if(x.spot.isWhite){
             for(int i = 0; i < W.pieces.length;i++) {
                 if (x == W.pieces[i])
-                    s = i;
+                    w = i;
+                if(B.pieces[i].spot.x == x.spot.x-1 && B.pieces[i].spot.y == x.spot.y+1)
+                    l = i;
 
             }
             System.out.println(x.canEat(b.board[x.spot.y+1][x.spot.x-1]));
@@ -120,8 +131,15 @@ public class Game {
                 b.board[x.spot.y+1][x.spot.x-1].isWhite=true;
                 b.board[x.spot.y+1][x.spot.x-1].isAvaiable=false;
 
-                W.pieces[s].spot = b.board[x.spot.y+1][x.spot.x-1];
-                W.pieces[s].spot.isWhite = true;
+                W.pieces[w].spot = b.board[x.spot.y+1][x.spot.x-1];
+                W.pieces[w].spot.isWhite = true;
+                B.pieces[l].isPieceAvaiable = false;
+                isWin(x);
+                return true;
+            }
+
+            else{
+                return false;
             }
 
         }
@@ -129,7 +147,9 @@ public class Game {
         else{
             for(int i = 0; i < B.pieces.length;i++) {
                 if (x == B.pieces[i])
-                    s = i;
+                    w = i;
+                if(W.pieces[i].spot.x == x.spot.x+1 && W.pieces[i].spot.y == x.spot.y-1)
+                    l = i;
 
             }
 
@@ -139,20 +159,29 @@ public class Game {
                 b.board[x.spot.y-1][x.spot.x+1].isWhite=false;
                 b.board[x.spot.y-1][x.spot.x+1].isAvaiable=false;
 
-                B.pieces[s].spot = b.board[x.spot.y-1][x.spot.x+1];
-                B.pieces[s].spot.isWhite = false;
+                B.pieces[w].spot = b.board[x.spot.y-1][x.spot.x+1];
+                B.pieces[w].spot.isWhite = false;
+                W.pieces[l].isPieceAvaiable = false;
+                isWin(x);
+                return true;
+            }
+            else{
+                return false;
             }
 
         }
-        isWin(x);
+
     }
 
-    public void eatRight(Piece x){
-        int s = 0;
+    public boolean eatRight(Piece x){
+        int w = 0;
+        int l = 0;
         if(x.spot.isWhite){
             for(int i = 0; i < W.pieces.length;i++) {
                 if (x == W.pieces[i])
-                    s = i;
+                    w = i;
+                if(B.pieces[i].spot.x == x.spot.x+1 && B.pieces[i].spot.y == x.spot.y+1)
+                    l = i;
 
             }
             System.out.println(x.canEat(b.board[x.spot.y+1][x.spot.x+1]));
@@ -162,8 +191,15 @@ public class Game {
                 b.board[x.spot.y+1][x.spot.x+1].isWhite=true;
                 b.board[x.spot.y+1][x.spot.x+1].isAvaiable=false;
 
-                W.pieces[s].spot = b.board[x.spot.y+1][x.spot.x+1];
-                W.pieces[s].spot.isWhite = true;
+                W.pieces[w].spot = b.board[x.spot.y+1][x.spot.x+1];
+                W.pieces[w].spot.isWhite = true;
+                B.pieces[l].isPieceAvaiable = false;
+                isWin(x);
+                return true;
+            }
+
+            else{
+                return false;
             }
 
         }
@@ -171,7 +207,9 @@ public class Game {
         else{
             for(int i = 0; i < B.pieces.length;i++) {
                 if (x == B.pieces[i])
-                    s = i;
+                    w = i;
+                if(W.pieces[i].spot.x == x.spot.x-1 && W.pieces[i].spot.y == x.spot.y-1)
+                    l = i;
 
             }
 
@@ -181,12 +219,20 @@ public class Game {
                 b.board[x.spot.y-1][x.spot.x-1].isWhite=false;
                 b.board[x.spot.y-1][x.spot.x-1].isAvaiable=false;
 
-                B.pieces[s].spot = b.board[x.spot.y-1][x.spot.x-1];
-                B.pieces[s].spot.isWhite = false;
+                B.pieces[w].spot = b.board[x.spot.y-1][x.spot.x-1];
+                B.pieces[w].spot.isWhite = false;
+                W.pieces[l].isPieceAvaiable = false;
+                isWin(x);
+                return true;
+            }
+
+            else{
+                return false;
+
             }
 
         }
-        isWin(x);
+
 
     }
 

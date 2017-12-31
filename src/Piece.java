@@ -1,9 +1,9 @@
 public class Piece {
     Spot spot;
-
+    boolean isPieceAvaiable;
     Piece(Spot x){
         this.spot = x;
-
+        isPieceAvaiable = true;
 
     }
 
